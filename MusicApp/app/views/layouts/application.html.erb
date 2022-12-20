@@ -11,5 +11,10 @@
 
   <body>
     <%= yield %>
+    <% if flash[:errors] %>
+        <% flash[:errors].each do |error| %>
+          <p style="color:#E92900"> <%= error %> </p>
+        <% end %>
+     <% end %>
   </body>
 </html>
