@@ -8,12 +8,14 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  username        :string           not null
 #
 class User < ApplicationRecord
 
+    validates :username, uniqueness: true, presence: true
     validates :email, uniqueness: true, presence: true
     validates :password_digest, presence: true
-    validates :password, length {minimum: 9}, allow_nil: true
+    validates :password, length: {minimum: 5}, allow_nil: true
     before_validation :ensure_session_token
 
     def self.find_by_creds(email, password)
@@ -45,14 +47,8 @@ class User < ApplicationRecord
         password_obj.is_password?(password)
     end
 
-
-
-
     private
     attr_reader :password
-    def session_token_validation
-
-    end
 
     def generate_unique_session_token
         SecureRandom::urlsafe_base64
