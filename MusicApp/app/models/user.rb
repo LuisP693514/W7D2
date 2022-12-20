@@ -19,7 +19,7 @@ class User < ApplicationRecord
     before_validation :ensure_session_token
 
     def self.find_by_creds(email, password)
-        user = self.find_by(email: params[:email])
+        user = self.find_by(email: email)
 
         if user && user.is_password?(password)
             user

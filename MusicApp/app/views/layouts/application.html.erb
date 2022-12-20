@@ -16,5 +16,10 @@
           <p style="color:#E92900"> <%= error %> </p>
         <% end %>
      <% end %>
+     <% if flash[:messages] %>
+        <% flash[:messages].each do |message| %>
+          <p style="color:#04B2D8"> <%= message %> </p>
+        <% end %>
+     <% end %>
   </body>
 </html>
